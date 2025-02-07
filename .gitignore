@@ -1,6 +1,7 @@
 .gradle/
 build/
 out/
+hgladiator/target/
 hgladiator/bin/
 hgladiator/.settings
 hgladiator/.classpath
