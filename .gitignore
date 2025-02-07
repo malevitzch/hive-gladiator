@@ -1,5 +1,8 @@
 .gradle/
 build/
 out/
+hgladiator/bin/
+hgladiator/.settings
+hgladiator/.classpath
 !gradle/wrapper/gradle-wrapper.jar
 .project
