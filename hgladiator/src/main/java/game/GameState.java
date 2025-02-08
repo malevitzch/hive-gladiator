@@ -9,12 +9,12 @@ public class GameState {
 		score = 0;
 	}
 	
-	public Boolean isValid(Move m) {
+	public Boolean isValid(Move move) {
 		//TODO: Validate the move legality
 		return true;
 	}
-	public Boolean makeMove(Move m) {
-		if(!isValid(m)) return false;
+	public Boolean makeMove(Move move) {
+		if(!isValid(move)) return false;
 		//TODO: Code goes here
 		return true;
 	}

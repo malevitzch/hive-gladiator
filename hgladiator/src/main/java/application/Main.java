@@ -1,12 +1,13 @@
 package application;
 
-import game.Game;
+import game.GameDisplay;
 import player.AfkPlayer;
+import game.Game;
 
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("The Hive awaits you, gladiator");
-		Game game = new Game(new AfkPlayer());
-		game.play();
+		GameDisplay game = new GameDisplay(new Game(new AfkPlayer()));
+		game.run();
     }
 }

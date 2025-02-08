@@ -8,8 +8,8 @@ public class Game {
 		player = p;
 		state = new GameState();
 	}
-	public void play() { 
-		System.out.println("Welcome to the hive");
+	public Boolean isOver() {
+		return state.isOver();
 	}
 	public Boolean nextTurn() {
 		return !state.isOver();
