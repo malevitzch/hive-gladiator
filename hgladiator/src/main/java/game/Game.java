@@ -8,8 +8,6 @@ public class Game {
 		player = p;
 		state = new GameState();
 	}
-	public Game() {
-	}
 	public void play() { 
 		System.out.println("Welcome to the hive");
 	}
