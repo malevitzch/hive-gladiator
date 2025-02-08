@@ -1,5 +1,5 @@
 package player.move;
 
-public abstract class Move {
-
+public interface Move {
+	public abstract void execute();
 }
