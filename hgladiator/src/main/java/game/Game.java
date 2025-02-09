@@ -1,9 +1,10 @@
 package game;
 import player.Player;
+import player.move.Move;
 
 public class Game {
-	Player player;
-	GameState state;
+	private Player player;
+	private GameState state;
 	public Game(Player p){
 		player = p;
 		state = new GameState();
@@ -12,6 +13,8 @@ public class Game {
 		return state.isOver();
 	}
 	public Boolean nextTurn() {
+		Move player_move = player.getMove(state);
+		state.makeMove(player_move);
 		return !state.isOver();
 	}
 }

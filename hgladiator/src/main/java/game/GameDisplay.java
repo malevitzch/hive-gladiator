@@ -27,8 +27,9 @@ public class GameDisplay {
 			catch(InterruptedException error) {
 				error.printStackTrace();
 			}
-			game.nextTurn();
 			System.out.println("Turn");
+			game.nextTurn();
 		}
+		frame.setVisible(false);
 	}
 }
