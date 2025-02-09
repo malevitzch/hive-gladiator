@@ -1,8 +1,8 @@
 package player;
 
-import game.GameState;
+import game.ImmutableGameState;
 import player.move.Move;
 
 public abstract interface Player {
-	public Move getMove(GameState state);
+	public Move getMove(ImmutableGameState state);
 }

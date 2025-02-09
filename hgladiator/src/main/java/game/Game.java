@@ -13,7 +13,7 @@ public class Game {
 		return state.isOver();
 	}
 	public Boolean nextTurn() {
-		Move player_move = player.getMove(state);
+		Move player_move = player.getMove(new ImmutableGameState(state));
 		state.makeMove(player_move);
 		return !state.isOver();
 	}
