@@ -17,4 +17,7 @@ public class Game {
 		state.makeMove(player_move);
 		return !state.isOver();
 	}
+	public GameState getState() {
+		return state;
+	}
 }

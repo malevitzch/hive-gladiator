@@ -1,8 +1,7 @@
 package application;
 
-import game.GameDisplay;
-import player.AfkPlayer;
 import game.Game;
+import player.AfkPlayer;
 
 public class Main {
 	public static void main(String[] args) {

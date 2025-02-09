@@ -5,13 +5,13 @@ import player.move.Move;
 public class GameState {
 	//TODO: Add all the important information about game state
 	private int score;
-	private int player_life;
+	private int player_health;
 	
 	public GameState() {
 		score = 0;
 		//TODO: This potentially depends on some settings conditions
 		//TODO: Add a settings class that is used to initialize the game state
-		player_life = 5;
+		player_health = 5;
 	}
 	
 	public Boolean isValid(Move move) {
@@ -36,13 +36,16 @@ public class GameState {
 			player_move.execute(this);
 		}
 		
-		player_life--;
+		player_health--;
 		return true;
 	}
 	public Boolean isOver() {
-		return player_life <= 0;
+		return player_health <= 0;
 	}
 	public int getScore() {
 		return score;
+	}
+	public int getPlayerHealth() {
+		return player_health;
 	}
 }
