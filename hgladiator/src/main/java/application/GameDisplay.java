@@ -5,22 +5,22 @@ import java.awt.*;
 
 public class GameDisplay {
 	private Game game;
-	private Frame game_frame;
+	private Frame gameFrame;
 	Canvas canvas;
 	public GameDisplay(Game game) {
 		this.game = game;
 		
 		// Create the window
-		game_frame = new Frame("GameWindow");
-		game_frame.setSize(1000, 1000);
-		game_frame.setVisible(true);
-        game_frame.addWindowListener(new java.awt.event.WindowAdapter() {
+		gameFrame = new Frame("GameWindow");
+		gameFrame.setSize(1000, 1000);
+		gameFrame.setVisible(true);
+        gameFrame.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent we) {
                 System.exit(0);
             }
         });
         canvas = new GameCanvas(game.getState());
-        game_frame.add(canvas);
+        gameFrame.add(canvas);
 	}
 	private void drawGame() {
 		canvas.repaint();
@@ -38,6 +38,6 @@ public class GameDisplay {
 			System.out.println("Turn");
 			game.nextTurn();
 		}
-		game_frame.setVisible(false);
+		gameFrame.setVisible(false);
 	}
 }

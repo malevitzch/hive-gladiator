@@ -5,16 +5,16 @@ import player.move.Move;
 public class Game {
 	private Player player;
 	private GameState state;
-	public Game(Player p){
-		player = p;
+	public Game(Player player){
+		this.player = player;
 		state = new GameState();
 	}
 	public Boolean isOver() {
 		return state.isOver();
 	}
 	public Boolean nextTurn() {
-		Move player_move = player.getMove(new ImmutableGameState(state));
-		state.makeMove(player_move);
+		Move playerMove = player.getMove(new ImmutableGameState(state));
+		state.makeMove(playerMove);
 		return !state.isOver();
 	}
 	public GameState getState() {
