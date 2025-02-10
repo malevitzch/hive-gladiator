@@ -19,6 +19,8 @@ public class GameDisplay {
                 System.exit(0);
             }
         });
+        
+        // Create the canvas
         canvas = new GameCanvas(game.getState());
         gameFrame.add(canvas);
 	}
@@ -27,8 +29,11 @@ public class GameDisplay {
 	}
 	public void run() {
 		while(!game.isOver()) {
-			// Display the game here
+			// Display the game
 			drawGame();
+			
+			// Sleep so that the game is not over in an instant when the player is automatic
+			// TODO: This should be configurable through DisplayConfig or something like that
 			try {
 				Thread.sleep(1000);
 			}

@@ -6,13 +6,14 @@ public class GameState {
 	//TODO: Add all the important information about game state
 	private int score;
 	private int playerHealth;
+	private GameConfig config;
 	
-	public GameState() {
+	public GameState(GameConfig config) {
+		this.config = config;
 		score = 0;
-		//TODO: This potentially depends on some settings conditions
-		//TODO: Add a settings class that is used to initialize the game state
-		playerHealth = 5;
+		playerHealth = this.config.getPlayerHealth();
 	}
+	
 	
 	public Boolean isValid(Move move) {
 		//TODO: Validate the move legality
