@@ -1,6 +1,7 @@
 package application;
 
 import game.Game;
+
 import player.AfkPlayer;
 
 public class Main {
