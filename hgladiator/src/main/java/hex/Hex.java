@@ -16,17 +16,23 @@ public class Hex<V> {
 	public V getData() {
 		return data;
 	}
+	
 	public int getQ() {
 		return coordinates.q;
 	}
+	
 	public int getR() {
 		return coordinates.r;
 	}
+	
 	public int getS() {
 		return coordinates.s;
 	}
+	
 	public ArrayList<HexCoord> getNeighbourCoords() {
+		
 		ArrayList<HexCoord> coordList = new ArrayList<HexCoord>();
+		
 		int q = coordinates.q;
 		int r = coordinates.r;
 		int s = coordinates.s;
