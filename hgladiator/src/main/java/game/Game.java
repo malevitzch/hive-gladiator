@@ -1,11 +1,11 @@
 package game;
-import player.Player;
+import player.PlayerAgent;
 import player.move.Move;
 
 public class Game {
-	private Player player;
+	private PlayerAgent player;
 	private GameState state;
-	public Game(Player player){
+	public Game(PlayerAgent player){
 		this.player = player;
 		state = new GameState(new GameConfig(10));
 	}

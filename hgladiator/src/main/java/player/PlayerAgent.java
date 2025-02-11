@@ -3,6 +3,6 @@ package player;
 import game.ImmutableGameState;
 import player.move.Move;
 
-public abstract interface Player {
+public interface PlayerAgent {
 	public Move getMove(ImmutableGameState state);
 }
