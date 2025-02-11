@@ -5,16 +5,21 @@ import java.util.ArrayList;
 
 public class HexBoard<V> {
 	
-	HashMap<HexCoord, Hex<V>> hexes;
+	HashMap<HexCoord, Hex<V>> hexMap;
 	
-	public ArrayList<Hex<V>> getNeighbours(Hex<V> hex) {
-		ArrayList<Hex<V>> neighbours = new ArrayList<Hex<V>>();
-		for(HexCoord coord : hex.getNeighbourCoords()) {
-			if(hexes.containsKey(coord)) {
-				neighbours.add(hexes.get(coord));
+	// Not sure if this should be public or private
+	public ArrayList<Hex<V>> getHexesFromCoords(ArrayList<HexCoord> coords) {
+		ArrayList<Hex<V>> hexes = new ArrayList<Hex<V>>();
+		for(HexCoord coord : coords) {
+			if(hexMap.containsKey(coord)) {
+				hexes.add(hexMap.get(coord));
 			}
 		}
-		return neighbours;
+		return hexes;
+	}
+	
+	public ArrayList<Hex<V>> getNeighbours(Hex<V> hex) {
+		return getHexesFromCoords(hex.getNeighbourCoords());
 	}
 	
 }

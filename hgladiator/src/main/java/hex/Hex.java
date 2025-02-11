@@ -29,21 +29,42 @@ public class Hex<V> {
 		return coordinates.s;
 	}
 	
-	public ArrayList<HexCoord> getNeighbourCoords() {
-		
+	public ArrayList<HexCoord> findCoordsInLineAtExactDistance(int n) {
 		ArrayList<HexCoord> coordList = new ArrayList<HexCoord>();
+		if(n < 0) {
+			return coordList;
+		}
+		if(n == 0) {
+			coordList.add(coordinates);
+			return coordList;
+		}
 		
 		int q = coordinates.q;
 		int r = coordinates.r;
 		int s = coordinates.s;
 		
-		coordList.add(new HexCoord(q, r-1, s+1));
-		coordList.add(new HexCoord(q, r+1, s-1));
-		coordList.add(new HexCoord(q-1, r, s+1));
-		coordList.add(new HexCoord(q+1, r, s-1));
-		coordList.add(new HexCoord(q-1, r+1, s));
-		coordList.add(new HexCoord(q+1, r-1, s));
+		coordList.add(new HexCoord(q, r-n, s+n));
+		coordList.add(new HexCoord(q, r+n, s-n));
+		coordList.add(new HexCoord(q-n, r, s+n));
+		coordList.add(new HexCoord(q+n, r, s-n));
+		coordList.add(new HexCoord(q-n, r+n, s));
+		coordList.add(new HexCoord(q+n, r-n, s));
 		
 		return coordList;
 	}
+	
+	public ArrayList<HexCoord> findCoordsInLineAtDistanceInRange(int l, int r) {
+		ArrayList<HexCoord> coordList = new ArrayList<HexCoord>();
+		
+		for(int d = l; d <= r; d++) {
+			coordList.addAll(findCoordsInLineAtExactDistance(d));
+		}
+		
+		return coordList;
+	}
+	
+	public ArrayList<HexCoord> getNeighbourCoords() {
+		return findCoordsInLineAtExactDistance(1);
+	}
+	
 }
