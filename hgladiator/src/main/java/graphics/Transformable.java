@@ -3,9 +3,9 @@ package graphics;
 import core.Position;
 import core.Transform;
 
-abstract public class Entity implements Drawable{
+abstract public class Transformable implements Drawable{
 
-    public Entity()
+    public Transformable()
     {
         m_Transform = new Transform();
     }

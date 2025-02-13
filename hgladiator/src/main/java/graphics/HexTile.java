@@ -5,7 +5,7 @@ import core.Transform;
 import java.awt.*;
 
 
-public class HexTile extends Entity {
+public class HexTile extends Transformable {
 
     public HexTile(double Radius)
     {

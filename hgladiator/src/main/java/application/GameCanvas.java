@@ -24,7 +24,6 @@ public class GameCanvas extends Canvas {
 		skibidi.scale = 1.0;
 		skibidi.position = new Position(200,200);
 
-
 		for(int i = 0; i < 10; i++)
 		{
 			skibidi.position = new Position(100 + i * 50,200);
