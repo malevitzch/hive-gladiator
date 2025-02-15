@@ -1,5 +1,7 @@
 package core;
-import core.Dependencies;
+import core.event.Events;
+import core.event.EventBus;
+import core.event.KeyCode;
 import graphics.Color;
 import org.lwjgl.opengl.GL;
 
@@ -58,7 +60,7 @@ public class Window {
     }
 
     public boolean isOpen(){
-        return !glfwWindowShouldClose(glfwWindow);
+        return open;
     }
 
     private void init() {
@@ -71,12 +73,7 @@ public class Window {
         if(glfwWindow == NULL){
             throw new RuntimeException("Failed to create the GLFW window");
         }
-
-        glfwSetKeyCallback(glfwWindow, (window, key, scancode, action, mods) -> {
-            if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-                glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
-        });
-
+        SetCallbacks();
         glfwMakeContextCurrent(glfwWindow);
         if(context.vsync){
             glfwSwapInterval(1);
@@ -87,6 +84,35 @@ public class Window {
         open = true;
 
     }
+
+    private void SetCallbacks(){
+
+        glfwSetKeyCallback(glfwWindow, (window, key, scancode, action, mods) -> {
+
+            if (action == GLFW_RELEASE ) {
+                EventBus.Broadcast(new Events.KeyReleasedEvent(KeyCode.FromInt(key)));
+            }
+
+            if(action == GLFW_PRESS) {
+                EventBus.Broadcast(new Events.KeyPressedEvent(KeyCode.FromInt(key)));
+            }
+        });
+
+        glfwSetMouseButtonCallback(glfwWindow,(window,button,action,mods) -> {
+            if(action == GLFW_PRESS){
+                EventBus.Broadcast(new Events.MouseButtonPressedEvent(KeyCode.FromInt(button)));
+            }
+
+            if(action == GLFW_RELEASE){
+                EventBus.Broadcast(new Events.MouseButtonReleasedEvent(KeyCode.FromInt(button)));
+            }
+        });
+
+        glfwSetWindowCloseCallback(glfwWindow,(window) ->{
+            EventBus.Broadcast(new Events.WindowClosedEvent());
+        });
+    }
+
     private  WindowContext context;
     private long glfwWindow;
     private boolean open;
