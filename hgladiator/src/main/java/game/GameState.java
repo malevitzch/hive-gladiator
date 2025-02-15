@@ -1,6 +1,10 @@
 package game;
 
 import player.move.Move;
+import game.entities.Entity;
+
+import java.util.PriorityQueue;
+import java.util.Comparator;
 
 public class GameState {
 	//TODO: Add all the important information about game state
@@ -22,19 +26,27 @@ public class GameState {
 	public Boolean makeMove(Move player_move) {
 		if(!isValid(player_move) || isOver()) return false;
 		//TODO: Code goes here
-		final int player_move_priority = player_move.getPriority();
+		final int playerMovePriority = player_move.getPriority();
 		
-		// Fast monster moves happen here
-		if(player_move_priority == 0) {
-			player_move.execute(this);
+		PriorityQueue<Entity> entitiesToAct = new PriorityQueue<Entity>(
+			new Comparator<Entity>() {
+				@Override
+				public int compare(Entity e1, Entity e2) {
+					return Integer.compare(e1.getActionPriority(), e2.getActionPriority());
+				}
+			});
+		
+		// TODO: fill the entity queue by going through every hex in the board
+		while(!entitiesToAct.isEmpty() && entitiesToAct.peek().getActionPriority() <= playerMovePriority) {
+			Entity curEntity = entitiesToAct.poll();
+			curEntity.act(this);
 		}
-		// Regular monster moves happen here
-		if(player_move_priority == 1) {
-			player_move.execute(this);
-		}
-		// Slow monster moves happen here
-		if(player_move_priority == 2) {
-			player_move.execute(this);
+		// WARNING player might be dead here
+		player_move.execute(this);
+		
+		while(!entitiesToAct.isEmpty()) {
+			Entity curEntity = entitiesToAct.poll();
+			curEntity.act(this);
 		}
 		
 		playerHealth--;
