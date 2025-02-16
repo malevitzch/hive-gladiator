@@ -6,49 +6,49 @@ import core.event.EventBus;
 import graphics.Color;
 
 public class Application implements EventBus.EventCallback {
-    private void Init(){
+    private void init(){
         Dependencies.init();
         EventBus.Init();
         mainWindow = new Window(new Window.WindowContext(1080,720,"hgladiator"));
-        EventBus.Subscribe(this);
+        EventBus.subscribe(this);
     }
 
-    private void Run(){
+    private void run(){
         while(mainWindow.isOpen()) {
             double beginTime = System.currentTimeMillis();
-            EventBus.Update();
-            Update(deltaTime);
-            Render();
+            EventBus.update();
+            update(deltaTime);
+            render();
 
             deltaTime = (System.currentTimeMillis() - beginTime) * 0.001;
         }
     }
-    public void OnEvent(Event pEvent){
+    public void onEvent(Event pEvent){
         System.out.println(pEvent.ToString());
 
         if(pEvent.type == Event.Type.WindowClosed) mainWindow.close();
     }
-    private  void Update(double deltaTime){
+    private void update(double deltaTime){
         mainWindow.update();
     }
 
-    private void Render(){
+    private void render(){
         mainWindow.clear(new Color(0.0f,0.4f,0.6f,0.0f));
         mainWindow.render();
     }
 
-    private void Shutdown(){
-        EventBus.Shutdown();
+    private void shutdown(){
+        EventBus.shutdown();
         Dependencies.shutdown();
     }
     public static void main(String[] args)
     {
        Application App = new Application();
-       App.Init();
-       App.Run();
-       App.Shutdown();
+       App.init();
+       App.run();
+       App.shutdown();
     }
 
-    private  Window mainWindow;
-    private  double deltaTime = 0.0;
+    private Window mainWindow;
+    private double deltaTime = 0.0;
 }

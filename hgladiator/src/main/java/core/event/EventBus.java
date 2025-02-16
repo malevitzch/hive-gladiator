@@ -4,38 +4,38 @@ import java.util.Queue;
 import java.util.Vector;
 public class EventBus {
     public interface EventCallback{
-        public void OnEvent(Event pEvent);
+        public void onEvent(Event pEvent);
     }
 
     static public void Init(){
-        Events = new LinkedList<Event>();
-        Subscribers = new Vector<EventCallback>();
+        events = new LinkedList<Event>();
+        subscribers = new Vector<EventCallback>();
     }
 
-    static public void Shutdown(){
+    static public void shutdown(){
 
     }
 
-    static public void Subscribe(EventCallback pCallback){
-        Subscribers.add(pCallback);
+    static public void subscribe(EventCallback pCallback){
+        subscribers.add(pCallback);
     }
 
-    static public void Broadcast(Event pEvent){
-        Events.add(pEvent);
+    static public void broadcast(Event pEvent){
+        events.add(pEvent);
     }
 
-    static public void Update(){
-        while(!Events.isEmpty())
+    static public void update(){
+        while(!events.isEmpty())
         {
-            Event current = Events.remove();
-            for(EventCallback i : Subscribers)
+            Event current = events.remove();
+            for(EventCallback i : subscribers)
             {
-                i.OnEvent(current);
+                i.onEvent(current);
             }
         }
     }
 
-    static private Queue<Event> Events;
-    static private Vector<EventCallback> Subscribers;
+    static private Queue<Event> events;
+    static private Vector<EventCallback> subscribers;
 
 }

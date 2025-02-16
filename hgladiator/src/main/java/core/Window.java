@@ -90,26 +90,26 @@ public class Window {
         glfwSetKeyCallback(glfwWindow, (window, key, scancode, action, mods) -> {
 
             if (action == GLFW_RELEASE ) {
-                EventBus.Broadcast(new Events.KeyReleasedEvent(KeyCode.FromInt(key)));
+                EventBus.broadcast(new Events.KeyReleasedEvent(KeyCode.FromInt(key)));
             }
 
             if(action == GLFW_PRESS) {
-                EventBus.Broadcast(new Events.KeyPressedEvent(KeyCode.FromInt(key)));
+                EventBus.broadcast(new Events.KeyPressedEvent(KeyCode.FromInt(key)));
             }
         });
 
         glfwSetMouseButtonCallback(glfwWindow,(window,button,action,mods) -> {
             if(action == GLFW_PRESS){
-                EventBus.Broadcast(new Events.MouseButtonPressedEvent(KeyCode.FromInt(button)));
+                EventBus.broadcast(new Events.MouseButtonPressedEvent(KeyCode.FromInt(button)));
             }
 
             if(action == GLFW_RELEASE){
-                EventBus.Broadcast(new Events.MouseButtonReleasedEvent(KeyCode.FromInt(button)));
+                EventBus.broadcast(new Events.MouseButtonReleasedEvent(KeyCode.FromInt(button)));
             }
         });
 
         glfwSetWindowCloseCallback(glfwWindow,(window) ->{
-            EventBus.Broadcast(new Events.WindowClosedEvent());
+            EventBus.broadcast(new Events.WindowClosedEvent());
         });
     }
 
