@@ -3,6 +3,8 @@ import core.Window;
 import core.Dependencies;
 import core.event.Event;
 import core.event.EventBus;
+import core.event.KeyCode;
+import core.input.Input;
 import graphics.Color;
 
 public class Application implements EventBus.EventCallback {
@@ -10,6 +12,7 @@ public class Application implements EventBus.EventCallback {
         Dependencies.init();
         EventBus.Init();
         mainWindow = new Window(new Window.WindowContext(1080,720,"hgladiator"));
+        Input.init(mainWindow.getNative());
         EventBus.subscribe(this);
     }
 
@@ -30,6 +33,11 @@ public class Application implements EventBus.EventCallback {
     }
     private void update(double deltaTime){
         mainWindow.update();
+        if(Input.isMouseButtonPressed(KeyCode.MouseButtonLeft)){
+            System.out.println("LIVE: Pressed");
+        }
+
+        System.out.println(Input.getMousePosition().toString());
     }
 
     private void render(){
@@ -39,6 +47,7 @@ public class Application implements EventBus.EventCallback {
 
     public void shutdown(){
         EventBus.shutdown();
+        Input.shutdown();
         Dependencies.shutdown();
     }
 

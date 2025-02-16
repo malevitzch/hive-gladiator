@@ -112,7 +112,7 @@ public class Window {
             EventBus.broadcast(new Events.WindowClosedEvent());
         });
     }
-
+    public long getNative(){return glfwWindow;}
     private  WindowContext context;
     private long glfwWindow;
     private boolean open;
