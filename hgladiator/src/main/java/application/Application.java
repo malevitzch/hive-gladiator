@@ -6,14 +6,14 @@ import core.event.EventBus;
 import graphics.Color;
 
 public class Application implements EventBus.EventCallback {
-    private void init(){
+    public void init(){
         Dependencies.init();
         EventBus.Init();
         mainWindow = new Window(new Window.WindowContext(1080,720,"hgladiator"));
         EventBus.subscribe(this);
     }
 
-    private void run(){
+    public void run(){
         while(mainWindow.isOpen()) {
             double beginTime = System.currentTimeMillis();
             EventBus.update();
@@ -37,16 +37,9 @@ public class Application implements EventBus.EventCallback {
         mainWindow.render();
     }
 
-    private void shutdown(){
+    public void shutdown(){
         EventBus.shutdown();
         Dependencies.shutdown();
-    }
-    public static void main(String[] args)
-    {
-       Application App = new Application();
-       App.init();
-       App.run();
-       App.shutdown();
     }
 
     private Window mainWindow;
