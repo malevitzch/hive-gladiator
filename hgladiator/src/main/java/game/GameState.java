@@ -37,6 +37,7 @@ public class GameState {
 			});
 		
 		// TODO: fill the entity queue by going through every hex in the board
+		// TODO: there is a minor problem with this approach, the enemy move order gets mangled among enemies of the same priority
 		while(!entitiesToAct.isEmpty() && entitiesToAct.peek().getActionPriority() <= playerMovePriority) {
 			Entity curEntity = entitiesToAct.poll();
 			curEntity.act(this);
