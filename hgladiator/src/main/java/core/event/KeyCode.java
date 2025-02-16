@@ -6,7 +6,7 @@ public enum KeyCode {
         Backspace   (0x08),
         Tab         (0x09),
         Clear       (0x0C),
-        Enter       (0x0D),
+        Enter       (0x101),
         Shift       (0x10),
         Control     (0x11),
         Alt         (0x12),
@@ -114,14 +114,20 @@ public enum KeyCode {
 
         MouseButtonLeft (0x00),
         MouseButtonRight (0x01),
-        MouseButtonMiddle (0x02);
+        MouseButtonMiddle (0x02),
+
+        Undefined(-42);
         private static final Map map = new HashMap<>();
         static {
                 for (KeyCode code : KeyCode.values()) {
                         map.put(code.code, code);
                 }
         }
-        public static KeyCode FromInt(int pCode){return (KeyCode)map.get(pCode);}
+        public static KeyCode FromInt(int pCode){
+                KeyCode code = (KeyCode)map.get(pCode);
+                if(code == null) return Undefined;
+                return code;
+        }
         private final int code;
 
         int Code(){
