@@ -11,10 +11,15 @@ public class Hex<V> {
 	
 	public Hex(int q, int r, int s, V data) {
 		coordinates = new HexCoord(q, r, s);
+		this.data = data;
 	}
 	
 	public V getData() {
 		return data;
+	}
+	
+	public HexCoord getCoords() {
+		return coordinates;
 	}
 	
 	public int getQ() {

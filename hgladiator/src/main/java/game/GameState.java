@@ -2,20 +2,32 @@ package game;
 
 import player.move.Move;
 import game.entities.Entity;
+import hex.HexBoard;
+import hex.Hex;
 
 import java.util.PriorityQueue;
 import java.util.Comparator;
+import java.util.ArrayList;
 
 public class GameState {
 	//TODO: Add all the important information about game state
 	private int score;
 	private int playerHealth;
 	private GameConfig config;
+	private HexBoard<Tile> board;
 	
 	public GameState(GameConfig config) {
 		this.config = config;
 		score = 0;
 		playerHealth = this.config.getPlayerHealth();
+		int n = config.getMapSize();
+		ArrayList<Hex<Tile>> hexes = new ArrayList<>();
+		for(int i = 0; i <= n; i++) {
+			for(int j = 0; j <= n; j++) {
+				hexes.add(new Hex<>(i, j, 0 - i - j, new Tile()));
+			}
+		}
+		this.board = new HexBoard<>(hexes);
 	}
 	
 	
@@ -61,5 +73,10 @@ public class GameState {
 	}
 	public int getPlayerHealth() {
 		return playerHealth;
+	}
+	
+	//TODO: this might need to handle errors eventually
+	public Hex<Tile> getHex(int q, int r, int s) {
+		return board.getHex(q, r, s);
 	}
 }
