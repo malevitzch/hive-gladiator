@@ -79,4 +79,7 @@ public class GameState {
 	public Hex<Tile> getHex(int q, int r, int s) {
 		return board.getHex(q, r, s);
 	}
+	public ArrayList<Hex<Tile>> getAllHex() {
+		return board.getAllHex();
+	}
 }
