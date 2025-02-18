@@ -20,5 +20,10 @@ public class PlayerEntity implements Entity {
 	public void act(GameState state) {
 		// This is not the player move, this is stuff such a status effects etc
 	}
+	
+	// The player ID is always 0
+	public int getId() {
+		return 0;
+	}
 
 }

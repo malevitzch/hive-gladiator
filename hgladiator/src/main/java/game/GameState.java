@@ -9,12 +9,16 @@ import java.util.PriorityQueue;
 import java.util.Comparator;
 import java.util.ArrayList;
 
+// This is perhaps stupid but it works
+
 public class GameState {
 	//TODO: Add all the important information about game state
 	private int score;
 	private int playerHealth;
 	private GameConfig config;
 	private HexBoard<Tile> board;
+	
+	private int entityId = 1;
 	
 	public GameState(GameConfig config) {
 		this.config = config;
@@ -35,6 +39,7 @@ public class GameState {
 		//TODO: Validate the move legality
 		return true;
 	}
+	
 	public Boolean makeMove(Move player_move) {
 		if(!isValid(player_move) || isOver()) return false;
 		//TODO: Code goes here
