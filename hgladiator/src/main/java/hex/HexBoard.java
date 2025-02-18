@@ -27,6 +27,10 @@ public class HexBoard<V> {
 		return hexMap.get(new HexCoord(q, r, s));
 	}
 	
+	public Hex<V> getHex(HexCoord coords) {
+		return hexMap.get(coords);
+	}
+	
 	public ArrayList<Hex<V>> getAllHex() {
 		return new ArrayList<Hex<V>>(hexMap.values());
 	}

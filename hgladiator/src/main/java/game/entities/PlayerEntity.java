@@ -1,9 +1,12 @@
 package game.entities;
 
 import game.GameState;
+import game.Tile;
 
 public class PlayerEntity implements Entity {
 
+	Tile tile;
+	
 	@Override
 	public void die() {
 		// TODO implement, this should probably halt the game?
@@ -26,4 +29,11 @@ public class PlayerEntity implements Entity {
 		return 0;
 	}
 
+	public Tile getTile() {
+		return tile;
+	}
+	
+	public void setTile(Tile tile) {
+		this.tile = tile;
+	}
 }

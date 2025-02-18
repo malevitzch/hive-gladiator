@@ -3,11 +3,13 @@ package game;
 import player.move.Move;
 import game.entities.Entity;
 import hex.HexBoard;
+import hex.HexCoord;
 import hex.Hex;
 
 import java.util.PriorityQueue;
 import java.util.Comparator;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class GameState {
 	//TODO: Add all the important information about game state
@@ -16,9 +18,12 @@ public class GameState {
 	private GameConfig config;
 	private HexBoard<Tile> board;
 	
+	private HashMap<Integer, Entity> entities;
+	
 	private int entityId = 1;
 	
 	public GameState(GameConfig config) {
+		entities = new HashMap<>();
 		this.config = config;
 		score = 0;
 		playerHealth = this.config.getPlayerHealth();
@@ -70,12 +75,15 @@ public class GameState {
 		playerHealth--;
 		return true;
 	}
+	
 	public Boolean isOver() {
 		return playerHealth <= 0;
 	}
+	
 	public int getScore() {
 		return score;
 	}
+	
 	public int getPlayerHealth() {
 		return playerHealth;
 	}
@@ -84,7 +92,30 @@ public class GameState {
 	public Hex<Tile> getHex(int q, int r, int s) {
 		return board.getHex(q, r, s);
 	}
+	
 	public ArrayList<Hex<Tile>> getAllHex() {
 		return board.getAllHex();
+	}
+	
+	public Boolean addEntity(Entity entity, HexCoord coords) {
+		Tile targetTile = board.getHex(coords).getData();
+		if(targetTile.entity != null) {
+			return false;
+		}
+		targetTile.entity = entity;
+		entity.setTile(targetTile);
+		return true;
+	}
+	
+	public Boolean moveEntity(Entity entity, Tile target) {
+		if(target.entity != null) {
+			return false;
+		}
+		if(entity.getTile() != null) {
+			entity.getTile().entity = null;
+		}
+		entity.getTile().entity = null;
+		target.entity = entity;
+		return true;
 	}
 }
