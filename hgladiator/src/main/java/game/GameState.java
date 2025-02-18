@@ -9,8 +9,6 @@ import java.util.PriorityQueue;
 import java.util.Comparator;
 import java.util.ArrayList;
 
-// This is perhaps stupid but it works
-
 public class GameState {
 	//TODO: Add all the important information about game state
 	private int score;
@@ -49,12 +47,14 @@ public class GameState {
 			new Comparator<Entity>() {
 				@Override
 				public int compare(Entity e1, Entity e2) {
+					if(e1.getActionPriority() == e2.getActionPriority()) {
+						return Integer.compare(e1.getId(), e2.getId());
+					}
 					return Integer.compare(e1.getActionPriority(), e2.getActionPriority());
 				}
 			});
 		
 		// TODO: fill the entity queue by going through every hex in the board
-		// TODO: there is a minor problem with this approach, the enemy move order gets mangled among enemies of the same priority
 		while(!entitiesToAct.isEmpty() && entitiesToAct.peek().getActionPriority() <= playerMovePriority) {
 			Entity curEntity = entitiesToAct.poll();
 			curEntity.act(this);
