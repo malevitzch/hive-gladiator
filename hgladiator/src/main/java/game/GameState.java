@@ -9,7 +9,7 @@ import hex.Hex;
 import java.util.PriorityQueue;
 import java.util.Comparator;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class GameState {
 	//TODO: Add all the important information about game state
@@ -18,12 +18,12 @@ public class GameState {
 	private GameConfig config;
 	private HexBoard<Tile> board;
 	
-	private HashMap<Integer, Entity> entities;
+	private LinkedHashMap<Integer, Entity> entities;
 	
 	private int entityId = 1;
 	
 	public GameState(GameConfig config) {
-		entities = new HashMap<>();
+		entities = new LinkedHashMap<>();
 		this.config = config;
 		score = 0;
 		playerHealth = this.config.getPlayerHealth();
@@ -102,6 +102,10 @@ public class GameState {
 		if(targetTile.entity != null) {
 			return false;
 		}
+		if(entities.containsKey(entity.getId())) {
+			return false;
+		}
+		entities.put(entity.getId(), entity);
 		targetTile.entity = entity;
 		entity.setTile(targetTile);
 		return true;

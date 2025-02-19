@@ -1,5 +1,6 @@
-package game.entities;
+package game.entities.enemy;
 
+import game.entities.Entity;
 import game.GameState;
 import game.Tile;
 
