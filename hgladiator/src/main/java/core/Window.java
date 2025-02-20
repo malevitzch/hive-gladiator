@@ -2,8 +2,10 @@ package core;
 import core.event.Events;
 import core.event.EventBus;
 import core.event.KeyCode;
+import graphics.Bindable;
 import graphics.Color;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GLUtil;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -40,6 +42,10 @@ public class Window {
         init();
     }
 
+    public void Bind(Bindable pBindable){
+        pBindable.Bind(glfwWindow);
+    }
+
     public void close(){
         open = false;
         glfwFreeCallbacks(glfwWindow);
@@ -68,6 +74,7 @@ public class Window {
 
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
 
         glfwWindow = glfwCreateWindow(context.width, context.height,context.name,NULL,NULL);
         if(glfwWindow == NULL){
@@ -81,6 +88,14 @@ public class Window {
 
         glfwShowWindow(glfwWindow);
         GL.createCapabilities();
+        GLUtil.setupDebugMessageCallback();
+        glViewport(0, 0,context.width, context.height);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        glEnable(GL_DEPTH_TEST);
+        glEnable(GL_LINE_SMOOTH);
+
         open = true;
 
     }
@@ -110,6 +125,13 @@ public class Window {
 
         glfwSetWindowCloseCallback(glfwWindow,(window) ->{
             EventBus.broadcast(new Events.WindowClosedEvent());
+        });
+
+        glfwSetFramebufferSizeCallback(glfwWindow,(long window, int width,int height) ->{
+
+            context.width = width;
+            context.height = height;
+            glViewport(0, 0,context.width, context.height);
         });
     }
     public long getNative(){return glfwWindow;}
