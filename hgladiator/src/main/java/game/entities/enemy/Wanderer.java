@@ -4,12 +4,18 @@ import game.GameState;
 
 public class Wanderer extends EnemyEntity {
 
-	public Wanderer(int id) {
-		super(id, 1);
+	public Wanderer(int id, GameState state) {
+		super(id, 1, state);
 	}
 	
 	@Override
-	public void act(GameState state) {
-		// TODO: make a random move
+	public void act() {
+		super.act();
+		// TODO: make semi-random move
+	}
+
+	@Override
+	protected void decideMove() {
+		// TODO: Auto-generated method stub
 	}
 }

@@ -1,15 +1,15 @@
 package game;
 
-import player.move.Move;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.PriorityQueue;
+
 import game.entities.Entity;
+import hex.Hex;
 import hex.HexBoard;
 import hex.HexCoord;
-import hex.Hex;
-
-import java.util.PriorityQueue;
-import java.util.Comparator;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import player.move.Move;
 
 public class GameState {
 	//TODO: Add all the important information about game state
@@ -29,24 +29,24 @@ public class GameState {
 		playerHealth = this.config.getPlayerHealth();
 		int n = config.getMapSize();
 		ArrayList<Hex<Tile>> hexes = new ArrayList<>();
-		for(int i = 0; i <= n; i++) {
-			for(int j = 0; j <= n; j++) {
+		for(int i = -n; i <= n; i++) {
+			for(int j = -n; j <= n; j++) {
 				hexes.add(new Hex<>(i, j, 0 - i - j, new Tile()));
 			}
 		}
 		this.board = new HexBoard<>(hexes);
 	}
 	
-	
+	//FIXME: This needs to go eventually, the move should just be made but possibly have no effect
 	public Boolean isValid(Move move) {
-		//TODO: Validate the move legality
+		//TODO: To be fair this should probably just execute 
 		return true;
 	}
 	
-	public Boolean makeMove(Move player_move) {
-		if(!isValid(player_move) || isOver()) return false;
+	public Boolean makeMove(Move playerMove) {
+		if(!isValid(playerMove) || isOver()) return false;
 		//TODO: Code goes here
-		final int playerMovePriority = player_move.getPriority();
+		final int playerMovePriority = playerMove.getPriority();
 		
 		PriorityQueue<Entity> entitiesToAct = new PriorityQueue<Entity>(
 			new Comparator<Entity>() {
@@ -59,20 +59,30 @@ public class GameState {
 				}
 			});
 		
-		// TODO: fill the entity queue by going through every hex in the board
-		while(!entitiesToAct.isEmpty() && entitiesToAct.peek().getActionPriority() <= playerMovePriority) {
-			Entity curEntity = entitiesToAct.poll();
-			curEntity.act(this);
+		for(Entity entity : entities.values()) {
+			entitiesToAct.add(entity);
 		}
-		// WARNING player might be dead here
-		player_move.execute(this);
+		
+		Boolean playerMoved = false;
+		
 		
 		while(!entitiesToAct.isEmpty()) {
 			Entity curEntity = entitiesToAct.poll();
-			curEntity.act(this);
+			if(curEntity.getActionPriority() > playerMovePriority) {
+				playerMove.execute(this);
+				playerMoved = true;
+			}
+			curEntity.act();
 		}
 		
+		if(!playerMoved) {
+			playerMove.execute(this);
+			playerMoved = true;
+		}
+		
+		// TODO: remove this when the game starts to do something
 		playerHealth--;
+		
 		return true;
 	}
 	

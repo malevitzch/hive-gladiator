@@ -14,11 +14,16 @@ public abstract class EnemyEntity implements Entity {
 	}
 	@Override
 	public int getActionPriority() {
+		if(!moveComputed) {
+			decideMove();
+			moveComputed = true;
+		}
 		return actionPriority;
 	}
 	@Override
-	public void act(GameState state) {
+	public void act() {
 		// TODO: this should have the general default behavior for acting
+		moveComputed = false;
 	}
 	@Override
 	public int getId() {
@@ -33,11 +38,18 @@ public abstract class EnemyEntity implements Entity {
 		this.tile = tile;
 	}
 	
-	public EnemyEntity(int id, int actionPriority) {
+	public EnemyEntity(int id, int actionPriority, GameState state) {
 		this.id = id;
 		this.actionPriority = actionPriority;
+		this.state = state;
 	}
+	
+	// Decide what to do based on game state. Set action priority accordingly
+	protected abstract void decideMove();
+	
+	private GameState state;
 	private int id;
 	private int actionPriority;
-
+	//FIXME: solve the move problem somehow
+	private Boolean moveComputed = false;
 }

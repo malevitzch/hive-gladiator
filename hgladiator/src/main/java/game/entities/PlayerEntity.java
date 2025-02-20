@@ -20,7 +20,7 @@ public class PlayerEntity implements Entity {
 	}
 
 	@Override
-	public void act(GameState state) {
+	public void act() {
 		// This is not the player move, this is stuff such a status effects etc
 	}
 	
