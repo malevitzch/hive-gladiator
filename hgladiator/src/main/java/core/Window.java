@@ -21,14 +21,14 @@ public class Window {
         public String name;
         public boolean vsync;
 
-        public WindowContext(){
+        public WindowContext() {
             width = 420;
             height = 420;
             name = "Ciastko bylo klamstwem";
             vsync = false;
         }
 
-        public WindowContext(int pWidth, int pHeight, String pName){
+        public WindowContext(int pWidth, int pHeight, String pName) {
             this();
             width = pWidth;
             height = pHeight;
@@ -41,26 +41,26 @@ public class Window {
         init();
     }
 
-    public void Bind(Bindable pBindable){
+    public void bind(Bindable pBindable) {
         pBindable.Bind(glfwWindow);
     }
 
-    public void close(){
+    public void close() {
         open = false;
         glfwFreeCallbacks(glfwWindow);
         glfwDestroyWindow(glfwWindow);
     }
 
-    public void clear(Color pColor){
+    public void clear(Color pColor) {
         glClearColor(pColor.r, pColor.g, pColor.b, pColor.a);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
-    public void render(){
+    public void render() {
         glfwSwapBuffers(glfwWindow);
     }
 
-    public void update(){
+    public void update() {
         glfwPollEvents();
     }
 
@@ -99,7 +99,7 @@ public class Window {
 
     }
 
-    private void SetCallbacks(){
+    private void SetCallbacks() {
 
         glfwSetKeyCallback(glfwWindow, (window, key, scancode, action, mods) -> {
 
@@ -133,15 +133,18 @@ public class Window {
             glViewport(0, 0,context.width, context.height);
         });
     }
-    public long getNative(){return glfwWindow;}
+    public long getNative() {
+    	return glfwWindow;
+    }
 
-    public void setPolygonMode(PolygonMode pMode){
+    public void setPolygonMode(PolygonMode pMode) {
         glPolygonMode(GL_FRONT_AND_BACK,pMode.glCode);
     }
 
-    public void draw(Drawable pDrawable){
+    public void draw(Drawable pDrawable) {
         pDrawable.draw(this,new Transform());
     }
+    
     private final WindowContext context;
     private long glfwWindow;
     private boolean open;

@@ -10,7 +10,7 @@ public abstract class Event {
         MouseButtonReleased
     }
     public Type type;
-    public String ToString(){
+    public String ToString() {
         return "Event\n";
     }
 }

@@ -2,6 +2,8 @@ package graphics.samples;
 
 import core.Transform;
 import graphics.*;
+
+import org.joml.Vector4f;
 import org.lwjgl.system.MemoryUtil;
 
 import core.Window;
@@ -14,15 +16,15 @@ import static org.lwjgl.opengl.GL11.glDrawElements;
 public class HexTile extends Drawable {
 
     public HexTile(){
-
+    	
         super();
         renderSettings.type= TopologyType.TriangleFan;
         BufferLayout layout = new BufferLayout();
         layout.add(ShaderDataType.Float3);
-
+        
         vbo = new VertexBuffer(layout);
 
-        float[] vd= {
+        float[] vd = {
                 0.0f,    0.0f, 0.0f,     //center
                 -0.25f,   0.5f, 0.0f,     // left top
                 0.25f,    0.5f, 0.0f,    // right top
@@ -33,17 +35,16 @@ public class HexTile extends Drawable {
         };
 
         int[] ia = {
-                0,1,2,3,4,5,6,1
-
+                0,1,2,3,4,5,6,1 
         };
-        IntBuffer ib = MemoryUtil.memAllocInt(ia.length);
-        ib.put(ia).flip();
+        IntBuffer intBuffer = MemoryUtil.memAllocInt(ia.length);
+        intBuffer.put(ia).flip();
         ibo = new IndexBuffer();
-        ibo.SetData(ib);
+        ibo.SetData(intBuffer);
 
-        FloatBuffer fb = MemoryUtil.memAllocFloat(vd.length);
-        fb.put(vd).flip();
-        vbo.SetData(fb);
+        FloatBuffer floatBuffer = MemoryUtil.memAllocFloat(vd.length);
+        floatBuffer.put(vd).flip();
+        vbo.SetData(floatBuffer);
 
         vao = new VertexArray();
         vao.AddIndexBuffer(ibo);
@@ -52,11 +53,12 @@ public class HexTile extends Drawable {
 
     @Override
     public void draw(Window pTarget, Transform pTransform) {
-        pTarget.Bind(vao);
+        pTarget.bind(vao);
         glDrawElements(renderSettings.type.glCode,vao.getIndexBufferCount(),GL_UNSIGNED_INT,0);
     }
 
     private VertexArray vao;
     private IndexBuffer ibo;
     private VertexBuffer vbo;
+    private Vector4f color;
 }

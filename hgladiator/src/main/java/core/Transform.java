@@ -4,15 +4,13 @@ public class Transform {
     public Position position;
     public double rotation;
     public double scale;
-    public Transform()
-    {
+    public Transform() {
         this.position = new Position();
         this.rotation = 0;
         this.scale = 1.0;
 
     }
-    public Transform Combine(Transform Rhs)
-    {
+    public Transform combine(Transform Rhs) {
         this.position.Add(Rhs.position);
         this.rotation += Rhs.rotation;
         this.rotation %= 2 * Math.PI;

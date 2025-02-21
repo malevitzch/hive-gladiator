@@ -3,11 +3,11 @@ package application;
 import java.awt.*;
 
 
+
 import core.Position;
 import core.Rotation;
 import core.Transform;
 import game.GameState;
-import graphics.HexTile;
 
 public class GameCanvas extends Canvas {
 	private static final long serialVersionUID = 1L;

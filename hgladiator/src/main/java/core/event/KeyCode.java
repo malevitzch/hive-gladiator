@@ -98,17 +98,17 @@ public enum KeyCode {
                         map.put(code.code, code);
                 }
         }
-        public static KeyCode FromInt(int pCode){
+        public static KeyCode FromInt(int pCode) {
                 KeyCode code = (KeyCode)map.get(pCode);
                 if(code == null) return Undefined;
                 return code;
         }
         private final int code;
 
-        public int Code(){
+        public int Code() {
                 return code;
         }
-        KeyCode(int pCode){
+        KeyCode(int pCode) {
             code = pCode;
         }
 

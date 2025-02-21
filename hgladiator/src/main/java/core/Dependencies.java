@@ -5,15 +5,16 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class Dependencies {
     static private boolean initialized;
+    
     Dependencies() {
         initialized = false;
     }
 
     public static void init(){
+    	
         if(initialized) return;
-
         GLFWErrorCallback.createPrint(System.err).set();
-        if ( !glfwInit() ){
+        if ( !glfwInit() ) {
             glfwSetErrorCallback(null).free();
             throw new IllegalStateException("Unable to initialize GLFW");
         }

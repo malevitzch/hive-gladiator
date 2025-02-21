@@ -64,7 +64,7 @@ public class Application implements EventBus.EventCallback {
     private void render(){
         Vector4f pcol = new Vector4f(0.0f,0.7f,0.9f,1.0f);
         mainWindow.clear(new Color(0.2f, 0.3f, 0.3f, 1.0f));
-        mainWindow.Bind(testShader);
+        mainWindow.bind(testShader);
         testShader.setUniform("passedColor",targetColor);
         mainWindow.draw(testTile);
         mainWindow.render();

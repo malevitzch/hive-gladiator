@@ -1,14 +1,17 @@
 package application;
 
-import game.Game;
-import java.awt.*;
+import java.awt.Canvas;
+import java.awt.Frame;
 import java.util.Stack;
+
+import game.Game;
 
 public class GameDisplay {
 	private Game game;
 	private Frame gameFrame;
 	private Canvas canvas;
 	private Stack<Canvas> layers;
+	
 	public GameDisplay(Game game) {
 		this.game = game;
 		
@@ -29,12 +32,14 @@ public class GameDisplay {
 		layers.push(canvas);
         gameFrame.add(canvas);
 	}
+	
 	private void render() {
 		for(Canvas i : layers)
 		{
 			i.repaint();
 		}
 	}
+	
 	public void run() {
 		while(!game.isOver()) {
 			// Display the game
