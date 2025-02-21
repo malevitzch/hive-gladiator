@@ -7,7 +7,7 @@ public class Game {
 	private GameState state;
 	public Game(PlayerAgent player){
 		this.player = player;
-		state = new GameState(new GameConfig(10));
+		state = new GameState(new GameConfig(10, 3));
 	}
 	public Boolean isOver() {
 		return state.isOver();

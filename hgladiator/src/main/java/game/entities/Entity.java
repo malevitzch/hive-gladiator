@@ -1,8 +1,11 @@
 package game.entities;
+import game.Tile;
 
 public interface Entity {
 	public void die();
-	//This one might be a problem when implementing for players, needs some more thinking
 	public int getActionPriority();
 	public void act();
+	public int getId();
+	public Tile getTile();
+	public void setTile(Tile tile);
 }
