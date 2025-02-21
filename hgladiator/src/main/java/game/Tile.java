@@ -4,6 +4,6 @@ import game.entities.Entity;
 
 public class Tile {
 	//TODO: expand this
-	// Entity, Terrain, Effects?
+	// Transformable, Terrain, Effects?
 	Entity entity;
 }

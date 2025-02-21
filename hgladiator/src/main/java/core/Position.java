@@ -21,4 +21,8 @@ public class Position {
         this.y += Rhs.y;
         return this;
     };
+
+    public String toString(){
+        return "(" + x + ", " + y + ")";
+    }
 }

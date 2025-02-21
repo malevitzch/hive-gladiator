@@ -2,11 +2,13 @@ package application;
 
 import game.Game;
 import java.awt.*;
+import java.util.Stack;
 
 public class GameDisplay {
 	private Game game;
 	private Frame gameFrame;
-	Canvas canvas;
+	private Canvas canvas;
+	private Stack<Canvas> layers;
 	public GameDisplay(Game game) {
 		this.game = game;
 		
@@ -19,18 +21,25 @@ public class GameDisplay {
                 System.exit(0);
             }
         });
-        
+
+		layers = new Stack<Canvas>();
+
         // Create the canvas
         canvas = new GameCanvas(game.getState());
+		layers.push(canvas);
         gameFrame.add(canvas);
 	}
-	private void drawGame() {
-		canvas.repaint();
+	private void render() {
+		for(Canvas i : layers)
+		{
+			i.repaint();
+		}
 	}
 	public void run() {
 		while(!game.isOver()) {
 			// Display the game
-			drawGame();
+
+			render();
 			
 			// Sleep so that the game is not over in an instant when the player is automatic
 			// TODO: This should be configurable through DisplayConfig or something like that
