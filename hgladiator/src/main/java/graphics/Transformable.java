@@ -2,8 +2,9 @@ package graphics;
 
 import core.Position;
 import core.Transform;
+import core.Window;
 
-abstract public class Transformable implements Drawable{
+abstract public class Transformable extends Drawable{
 
     public Transformable()
     {
@@ -20,4 +21,7 @@ abstract public class Transformable implements Drawable{
         return this.m_Transform;
     }
     protected Transform m_Transform;
+
+    public void draw(Window window, Transform pTransform) {
+    }
 }

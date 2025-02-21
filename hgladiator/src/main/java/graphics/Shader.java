@@ -2,8 +2,10 @@ package graphics;
 import org.lwjgl.opengl.GL45.*;
 import org.lwjgl.opengl.GL20.*;
 
+import java.nio.FloatBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.joml.*;
 
 import static org.lwjgl.opengl.GL20.*;
 
@@ -14,8 +16,6 @@ public class Shader implements Bindable {
 
         String vertexShaderCode = Files.readString(Path.of(vertexShaderPath));
         String pixelShaderCode = Files.readString(Path.of(pixelShaderPath));
-        System.out.println(vertexShaderCode);
-        System.out.println(pixelShaderCode);
         glVertexShaderId = createGlShader(vertexShaderCode,GL_VERTEX_SHADER);
         glPixelShaderId = createGlShader(pixelShaderCode,GL_FRAGMENT_SHADER);
         link();
@@ -53,6 +53,20 @@ public class Shader implements Bindable {
 
         glValidateProgram(glProgramId);
 
+    }
+
+    public void setUniform(String name,Vector4f pData){
+        glUseProgram(glProgramId);
+        int location = glGetUniformLocation(glProgramId,name);
+        glUniform4f(location,pData.x,pData.y,pData.z,pData.w);
+    }
+
+    public void setUniform(String name, Matrix4f pdata){
+        glUseProgram(glProgramId);
+        int location = glGetUniformLocation(glProgramId,name);
+        FloatBuffer data = FloatBuffer.allocate(16);
+        pdata.get(data);
+        glUniformMatrix4fv(location,false,data);
     }
 
     private final int glProgramId;

@@ -2,8 +2,7 @@ package core;
 import core.event.Events;
 import core.event.EventBus;
 import core.event.KeyCode;
-import graphics.Bindable;
-import graphics.Color;
+import graphics.*;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLUtil;
 
@@ -135,7 +134,15 @@ public class Window {
         });
     }
     public long getNative(){return glfwWindow;}
-    private  WindowContext context;
+
+    public void setPolygonMode(PolygonMode pMode){
+        glPolygonMode(GL_FRONT_AND_BACK,pMode.glCode);
+    }
+
+    public void draw(Drawable pDrawable){
+        pDrawable.draw(this,new Transform());
+    }
+    private final WindowContext context;
     private long glfwWindow;
     private boolean open;
 
