@@ -21,17 +21,16 @@ public class GameCanvas extends Canvas {
 	public void paint(Graphics g) {
 		g.setFont(new Font("Arial", Font.BOLD, 20));
 		g.setColor(Color.RED);
-		HexTile test = new HexTile(25.0);
+
 		Transform skibidi = new Transform();
 		skibidi.scale = 1.0;
 		skibidi.position = new Position(200,200);
-
 
 		for(int i = 0; i < 10; i++)
 		{
 			skibidi.position = new Position(100 + i * 50,200);
 			skibidi.rotation = Rotation.Radians(i * 15);
-			test.draw(g,skibidi);
+
 		}
 
 
