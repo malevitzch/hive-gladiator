@@ -28,12 +28,19 @@ public class PlayerEntity implements Entity {
 	public int getId() {
 		return 0;
 	}
-
+	
+	public int getHealth() {
+		return state.getPlayerHealth();
+	}
+	
 	public Tile getTile() {
 		return tile;
 	}
 	
+	
 	public void setTile(Tile tile) {
 		this.tile = tile;
 	}
+	
+	protected GameState state;
 }

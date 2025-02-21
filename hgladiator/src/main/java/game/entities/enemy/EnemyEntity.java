@@ -22,12 +22,20 @@ public abstract class EnemyEntity implements Entity {
 	}
 	@Override
 	public void act() {
+		// TODO: die() might be either called here or on cleanup
+		if(health <= 0) {
+			return;
+		}
 		// TODO: this should have the general default behavior for acting
 		moveComputed = false;
 	}
 	@Override
 	public int getId() {
 		return id;
+	}
+	@Override
+	public int getHealth() {
+		return health;
 	}
 	@Override
 	public Tile getTile() {
@@ -47,7 +55,8 @@ public abstract class EnemyEntity implements Entity {
 	// Decide what to do based on game state. Set action priority accordingly
 	protected abstract void decideMove();
 	
-	private GameState state;
+	protected GameState state;
+	protected int health;
 	private int id;
 	private int actionPriority;
 	//FIXME: solve the move problem somehow

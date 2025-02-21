@@ -6,6 +6,7 @@ public interface Entity {
 	public int getActionPriority();
 	public void act();
 	public int getId();
+	public int getHealth();
 	public Tile getTile();
 	public void setTile(Tile tile);
 }

@@ -6,6 +6,7 @@ public class Wanderer extends EnemyEntity {
 
 	public Wanderer(int id, GameState state) {
 		super(id, 1, state);
+		health = 1;
 	}
 	
 	@Override
@@ -13,7 +14,7 @@ public class Wanderer extends EnemyEntity {
 		super.act();
 		// TODO: make semi-random move
 	}
-
+	
 	@Override
 	protected void decideMove() {
 		// TODO: Auto-generated method stub
