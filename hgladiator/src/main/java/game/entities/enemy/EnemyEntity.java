@@ -6,8 +6,6 @@ import game.Tile;
 
 public abstract class EnemyEntity implements Entity {
 	
-	Tile tile;
-	
 	@Override
 	public void die() {
 		// TODO: possibly remove since it does nothing so far
@@ -38,6 +36,13 @@ public abstract class EnemyEntity implements Entity {
 		return health;
 	}
 	@Override
+	public Boolean isDead() {
+		if(getHealth() <= 0) {
+			dead = true;
+		}
+		return dead;
+	}
+	@Override
 	public Tile getTile() {
 		return tile;
 	}
@@ -55,6 +60,8 @@ public abstract class EnemyEntity implements Entity {
 	// Decide what to do based on game state. Set action priority accordingly
 	protected abstract void decideMove();
 	
+	protected Tile tile;
+	protected Boolean dead = false;
 	protected GameState state;
 	protected int health;
 	private int id;

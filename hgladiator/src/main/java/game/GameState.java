@@ -1,9 +1,9 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
-import java.util.PriorityQueue;
 
 import game.entities.Entity;
 import hex.Hex;
@@ -37,42 +37,37 @@ public class GameState {
 		this.board = new HexBoard<>(hexes);
 	}
 	
-	//FIXME: This needs to go eventually, the move should just be made but possibly have no effect
-	public Boolean isValid(Move move) {
-		//TODO: To be fair this should probably just execute 
-		return true;
-	}
-	
 	public Boolean makeMove(Move playerMove) {
-		if(!isValid(playerMove) || isOver()) return false;
+		if(isOver()) return false;
+		
 		//TODO: Code goes here
 		final int playerMovePriority = playerMove.getPriority();
 		
-		PriorityQueue<Entity> entitiesToAct = new PriorityQueue<Entity>(
-			new Comparator<Entity>() {
-				@Override
-				public int compare(Entity e1, Entity e2) {
-					if(e1.getActionPriority() == e2.getActionPriority()) {
-						return Integer.compare(e1.getId(), e2.getId());
-					}
-					return Integer.compare(e1.getActionPriority(), e2.getActionPriority());
+		Comparator<Entity> entityCompare = new Comparator<Entity>() {
+			@Override
+			public int compare(Entity e1, Entity e2) {
+				if(e1.getActionPriority() == e2.getActionPriority()) {
+					return Integer.compare(e1.getId(), e2.getId());
 				}
-			});
+				return Integer.compare(e1.getActionPriority(), e2.getActionPriority());
+			}
+		};
+		
+		ArrayList<Entity> entitiesToAct = new ArrayList<Entity>();
 		
 		for(Entity entity : entities.values()) {
 			entitiesToAct.add(entity);
 		}
 		
+		Collections.sort(entitiesToAct, entityCompare);
+		
 		Boolean playerMoved = false;
 		
-		
-		while(!entitiesToAct.isEmpty()) {
-			Entity curEntity = entitiesToAct.poll();
-			if(curEntity.getActionPriority() > playerMovePriority) {
+		for(Entity entity : entitiesToAct) {
+			if(entity.getActionPriority() > playerMovePriority && !playerMoved) {
 				playerMove.execute(this);
 				playerMoved = true;
 			}
-			curEntity.act();
 		}
 		
 		if(!playerMoved) {
@@ -83,7 +78,13 @@ public class GameState {
 		// TODO: remove this when the game starts to do something
 		playerHealth--;
 		
-		return true;
+		
+		// Cleanup phase. Every entity that is dead is removed from the game
+		for(Entity entity : entitiesToAct) {
+			if(entity.isDead()) removeEntity(entity);
+		}
+		
+		return isOver();
 	}
 	
 	public Boolean isOver() {
@@ -119,6 +120,13 @@ public class GameState {
 		targetTile.entity = entity;
 		entity.setTile(targetTile);
 		return true;
+	}
+	
+	public void removeEntity(Entity entity) {
+		int id = entity.getId();
+		if(!entities.containsKey(id)) return;
+		entities.remove(id);
+		entity.getTile().entity = null;
 	}
 	
 	public Boolean moveEntity(Entity entity, Tile target) {
