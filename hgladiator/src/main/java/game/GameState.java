@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 
 import game.entities.Entity;
+import game.entities.PlayerEntity;
 import hex.Hex;
 import hex.HexBoard;
 import hex.HexCoord;
@@ -17,6 +18,7 @@ public class GameState {
 	private int playerHealth;
 	private GameConfig config;
 	private HexBoard<Tile> board;
+	private PlayerEntity playerEntity;
 	
 	private LinkedHashMap<Integer, Entity> entities;
 	
@@ -34,6 +36,8 @@ public class GameState {
 				hexes.add(new Hex<>(i, j, 0 - i - j, new Tile()));
 			}
 		}
+		// FIXME: The player entity should be instantiated with specific information probably
+		this.getHex(0, 0, 0).getData().setEntity(new PlayerEntity());
 		this.board = new HexBoard<>(hexes);
 	}
 	
@@ -110,14 +114,14 @@ public class GameState {
 	
 	public Boolean addEntity(Entity entity, HexCoord coords) {
 		Tile targetTile = board.getHex(coords).getData();
-		if(targetTile.entity != null) {
+		if(targetTile.getEntity() != null) {
 			return false;
 		}
 		if(entities.containsKey(entity.getId())) {
 			return false;
 		}
 		entities.put(entity.getId(), entity);
-		targetTile.entity = entity;
+		targetTile.setEntity(entity);
 		entity.setTile(targetTile);
 		return true;
 	}
@@ -126,18 +130,18 @@ public class GameState {
 		int id = entity.getId();
 		if(!entities.containsKey(id)) return;
 		entities.remove(id);
-		entity.getTile().entity = null;
+		entity.getTile().setEntity(null);
 	}
 	
 	public Boolean moveEntity(Entity entity, Tile target) {
-		if(target.entity != null) {
+		if(target.getEntity() != null) {
 			return false;
 		}
 		if(entity.getTile() != null) {
-			entity.getTile().entity = null;
+			entity.getTile().setEntity(null);
 		}
-		entity.getTile().entity = null;
-		target.entity = entity;
+		entity.getTile().setEntity(null);
+		target.setEntity(entity);
 		return true;
 	}
 }
