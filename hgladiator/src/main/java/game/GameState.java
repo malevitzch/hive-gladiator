@@ -36,9 +36,12 @@ public class GameState {
 				hexes.add(new Hex<>(i, j, 0 - i - j, new Tile()));
 			}
 		}
-		// FIXME: The player entity should be instantiated with specific information probably
-		this.getHex(0, 0, 0).getData().setEntity(new PlayerEntity());
 		this.board = new HexBoard<>(hexes);
+		
+		// FIXME: The player entity should be instantiated with specific information probably
+		// For now though the information is held inside the gameState class
+		playerEntity = new PlayerEntity();
+		this.getHex(0, 0, 0).getData().setEntity(playerEntity);
 	}
 	
 	public Boolean makeMove(Move playerMove) {
