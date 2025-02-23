@@ -66,6 +66,5 @@ public abstract class EnemyEntity implements Entity {
 	protected int health;
 	private int id;
 	private int actionPriority;
-	//FIXME: solve the move problem somehow
-	private Boolean moveComputed = false;
+	protected Boolean moveComputed = false;
 }

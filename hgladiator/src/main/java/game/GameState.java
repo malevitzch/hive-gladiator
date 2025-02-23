@@ -33,7 +33,10 @@ public class GameState {
 		ArrayList<Hex<Tile>> hexes = new ArrayList<>();
 		for(int i = -n; i <= n; i++) {
 			for(int j = -n; j <= n; j++) {
-				hexes.add(new Hex<>(i, j, 0 - i - j, new Tile()));
+				Tile tile = new Tile();
+				Hex<Tile> hex = new Hex<Tile>(i, j, 0 - i - j, tile);
+				tile.setHex(hex);
+				hexes.add(hex);
 			}
 		}
 		this.board = new HexBoard<>(hexes);
@@ -111,6 +114,10 @@ public class GameState {
 		return board.getHex(q, r, s);
 	}
 	
+	public Hex<Tile> getHex(HexCoord coords) {
+		return board.getHex(coords);
+	}
+	
 	public ArrayList<Hex<Tile>> getAllHex() {
 		return board.getAllHex();
 	}
@@ -137,7 +144,7 @@ public class GameState {
 	}
 	
 	public Boolean moveEntity(Entity entity, Tile target) {
-		if(target.getEntity() != null) {
+		if(!target.empty()) {
 			return false;
 		}
 		if(entity.getTile() != null) {

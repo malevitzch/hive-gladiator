@@ -1,6 +1,9 @@
 package game.entities.enemy;
 
 import game.GameState;
+import game.Tile;
+
+import hex.HexCoord;
 
 public class Wanderer extends EnemyEntity {
 
@@ -11,12 +14,20 @@ public class Wanderer extends EnemyEntity {
 	
 	@Override
 	public void act() {
+		if(!moveComputed) {
+			decideMove();
+		}
 		super.act();
-		// TODO: make semi-random move
+		Tile target = state.getHex(movePos).getData();
+		state.moveEntity(this, target);
+		// This is in case the path is blocked and there are no valid moves
+		if(movePos == null) return;
 	}
 	
 	@Override
 	protected void decideMove() {
-		// TODO: Auto-generated method stub
+		//TODO: get neighbors and decide on the target tile
 	}
+	
+	private HexCoord movePos = null;
 }
