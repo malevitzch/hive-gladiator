@@ -143,8 +143,10 @@ public class GameState {
 		if(entity.getTile() != null) {
 			entity.getTile().setEntity(null);
 		}
-		entity.getTile().setEntity(null);
+		
 		target.setEntity(entity);
+		entity.setTile(target);
+		
 		return true;
 	}
 }
