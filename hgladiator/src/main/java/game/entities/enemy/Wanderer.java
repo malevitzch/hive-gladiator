@@ -4,6 +4,9 @@ import game.GameState;
 import game.Tile;
 
 import hex.HexCoord;
+import hex.Hex;
+
+import java.util.ArrayList;
 
 public class Wanderer extends EnemyEntity {
 
@@ -18,6 +21,7 @@ public class Wanderer extends EnemyEntity {
 			decideMove();
 		}
 		super.act();
+		// TODO: tile might be destroyed
 		Tile target = state.getHex(movePos).getData();
 		state.moveEntity(this, target);
 		// This is in case the path is blocked and there are no valid moves
@@ -26,7 +30,21 @@ public class Wanderer extends EnemyEntity {
 	
 	@Override
 	protected void decideMove() {
-		//TODO: get neighbors and decide on the target tile
+		
+		// This should never happen but I'm guarding my back just in case
+		// Maybe should just throw an exception straight up
+		if(moveComputed) return;
+		
+		movePos = null;
+		moveComputed = true;
+		// TODO: add a more reasonable command that allows getting neighbours of a tile
+		ArrayList<Hex<Tile>> hexes = state.getBoard().getNeighbours(this.getTile().getHex());
+		for(Hex<Tile> hex : hexes) {
+			if(hex.getData().empty()) {
+				movePos = hex.getCoords();
+				break;
+			}
+		}
 	}
 	
 	private HexCoord movePos = null;

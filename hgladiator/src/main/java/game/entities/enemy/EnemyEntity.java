@@ -58,6 +58,7 @@ public abstract class EnemyEntity implements Entity {
 	}
 	
 	// Decide what to do based on game state. Set action priority accordingly
+	// TODO: maybe shouldn't be abstract and should just be a default boilerplate implementation
 	protected abstract void decideMove();
 	
 	protected Tile tile;

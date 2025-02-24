@@ -156,4 +156,9 @@ public class GameState {
 		
 		return true;
 	}
+	
+	// TODO: this might be removed later
+	public HexBoard getBoard() {
+		return board;
+	}
 }
