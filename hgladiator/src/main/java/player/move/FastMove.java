@@ -1,9 +1,9 @@
 package player.move;
 
-public interface NormalMove extends Move {
+public interface FastMove extends Move {
 	
 	default public int getPriority() {
-		return 2;
+		return 1;
 	}
 
 }

@@ -3,3 +3,4 @@ A simple game written in java. The goal is to first develop a single-player mode
 # Game structure
 
 # TODO list
+- Add unit vectors for the direction enum
