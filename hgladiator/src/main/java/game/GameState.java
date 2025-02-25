@@ -17,7 +17,7 @@ public class GameState {
 	private int score;
 	private int playerHealth;
 	private GameConfig config;
-	private HexBoard<Tile> board;
+	private HexBoard board;
 	private PlayerEntity playerEntity;
 	
 	private LinkedHashMap<Integer, Entity> entities;
@@ -30,21 +30,21 @@ public class GameState {
 		score = 0;
 		playerHealth = this.config.getPlayerHealth();
 		int n = config.getMapSize();
-		ArrayList<Hex<Tile>> hexes = new ArrayList<>();
+		ArrayList<Hex> hexes = new ArrayList<>();
 		for(int i = -n; i <= n; i++) {
 			for(int j = -n; j <= n; j++) {
 				Tile tile = new Tile();
-				Hex<Tile> hex = new Hex<Tile>(i, j, 0 - i - j, tile);
+				Hex hex = new Hex(i, j, 0 - i - j, tile);
 				tile.setHex(hex);
 				hexes.add(hex);
 			}
 		}
-		this.board = new HexBoard<>(hexes);
+		this.board = new HexBoard(hexes);
 		
 		// FIXME: The player entity should be instantiated with specific information probably
 		// For now though the information is held inside the gameState class
 		playerEntity = new PlayerEntity();
-		this.getHex(0, 0, 0).getData().setEntity(playerEntity);
+		this.getHex(0, 0, 0).getTile().setEntity(playerEntity);
 	}
 	
 	public Boolean makeMove(Move playerMove) {
@@ -110,20 +110,20 @@ public class GameState {
 	}
 	
 	//TODO: this might need to handle errors eventually
-	public Hex<Tile> getHex(int q, int r, int s) {
+	public Hex getHex(int q, int r, int s) {
 		return board.getHex(q, r, s);
 	}
 	
-	public Hex<Tile> getHex(HexCoord coords) {
+	public Hex getHex(HexCoord coords) {
 		return board.getHex(coords);
 	}
 	
-	public ArrayList<Hex<Tile>> getAllHex() {
+	public ArrayList<Hex> getAllHex() {
 		return board.getAllHex();
 	}
 	
 	public Boolean addEntity(Entity entity, HexCoord coords) {
-		Tile targetTile = board.getHex(coords).getData();
+		Tile targetTile = board.getHex(coords).getTile();
 		if(targetTile.getEntity() != null) {
 			return false;
 		}
@@ -156,6 +156,7 @@ public class GameState {
 		
 		return true;
 	}
+	
 	
 	// TODO: this might be removed later
 	public HexBoard getBoard() {

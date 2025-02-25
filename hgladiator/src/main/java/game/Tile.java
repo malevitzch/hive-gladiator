@@ -7,9 +7,9 @@ public class Tile {
 	//TODO: expand this
 	// Transformable, Terrain, Effects?
 	private Entity entity;
-	private Hex<Tile> hex;
+	private Hex hex;
 	
-	public Tile(Hex<Tile> hex) {
+	public Tile(Hex hex) {
 		this.hex = hex;
 	}
 	
@@ -29,11 +29,11 @@ public class Tile {
 		this.entity = entity;
 	}
 	
-	public void setHex(Hex<Tile> hex) {
+	public void setHex(Hex hex) {
 		this.hex = hex;
 	}
 
-	public Hex<Tile> getHex() {
+	public Hex getHex() {
 		return hex;
 	}
 }

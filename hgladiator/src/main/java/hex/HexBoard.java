@@ -4,13 +4,13 @@ import java.util.Map;
 import java.util.LinkedHashMap;
 import java.util.ArrayList;
 
-public class HexBoard<V> {
+public class HexBoard {
 	
-	Map<HexCoord, Hex<V>> hexMap;
+	Map<HexCoord, Hex> hexMap;
 	
 	// Not sure if this should be public or private
-	public ArrayList<Hex<V>> getHexesFromCoords(ArrayList<HexCoord> coords) {
-		ArrayList<Hex<V>> hexes = new ArrayList<Hex<V>>();
+	public ArrayList<Hex> getHexesFromCoords(ArrayList<HexCoord> coords) {
+		ArrayList<Hex> hexes = new ArrayList<Hex>();
 		for(HexCoord coord : coords) {
 			if(hexMap.containsKey(coord)) {
 				hexes.add(hexMap.get(coord));
@@ -19,25 +19,25 @@ public class HexBoard<V> {
 		return hexes;
 	}
 	
-	public ArrayList<Hex<V>> getNeighbours(Hex<V> hex) {
+	public ArrayList<Hex> getNeighbours(Hex hex) {
 		return getHexesFromCoords(hex.getNeighbourCoords());
 	}
 	
-	public Hex<V> getHex(int q, int r, int s) {
+	public Hex getHex(int q, int r, int s) {
 		return hexMap.get(new HexCoord(q, r, s));
 	}
 	
-	public Hex<V> getHex(HexCoord coords) {
+	public Hex getHex(HexCoord coords) {
 		return hexMap.get(coords);
 	}
 	
-	public ArrayList<Hex<V>> getAllHex() {
-		return new ArrayList<Hex<V>>(hexMap.values());
+	public ArrayList<Hex> getAllHex() {
+		return new ArrayList<Hex>(hexMap.values());
 	}
 	
-	public HexBoard(ArrayList<Hex<V>> hexes) {
+	public HexBoard(ArrayList<Hex> hexes) {
 		hexMap = new LinkedHashMap<>();
-		for(Hex<V> hex : hexes) {
+		for(Hex hex : hexes) {
 			hexMap.put(hex.getCoords(), hex);
 		}
 	}

@@ -22,7 +22,7 @@ public class Wanderer extends EnemyEntity {
 		}
 		super.act();
 		// TODO: tile might be destroyed
-		Tile target = state.getHex(movePos).getData();
+		Tile target = state.getHex(movePos).getTile();
 		state.moveEntity(this, target);
 		// This is in case the path is blocked and there are no valid moves
 		if(movePos == null) return;
@@ -38,9 +38,9 @@ public class Wanderer extends EnemyEntity {
 		movePos = null;
 		moveComputed = true;
 		// TODO: add a more reasonable command that allows getting neighbours of a tile
-		ArrayList<Hex<Tile>> hexes = state.getBoard().getNeighbours(this.getTile().getHex());
-		for(Hex<Tile> hex : hexes) {
-			if(hex.getData().empty()) {
+		ArrayList<Hex> hexes = state.getBoard().getNeighbours(this.getTile().getHex());
+		for(Hex hex : hexes) {
+			if(hex.getTile().empty()) {
 				movePos = hex.getCoords();
 				break;
 			}

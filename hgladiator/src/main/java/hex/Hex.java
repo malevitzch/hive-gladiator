@@ -1,21 +1,22 @@
 package hex;
 
 import java.util.ArrayList;
+import game.Tile;
 
-public class Hex<V> {
+public class Hex {
 	// Data kept by the Hex
-	private V data;
+	private Tile tile;
 	
 	// Coordinates using the Cube coordinate system
 	private HexCoord coordinates;
 	
-	public Hex(int q, int r, int s, V data) {
+	public Hex(int q, int r, int s, Tile tile) {
 		coordinates = new HexCoord(q, r, s);
-		this.data = data;
+		this.tile = tile;
 	}
 	
-	public V getData() {
-		return data;
+	public Tile getTile() {
+		return tile;
 	}
 	
 	public HexCoord getCoords() {
