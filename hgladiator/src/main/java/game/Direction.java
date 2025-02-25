@@ -1,12 +1,23 @@
 package game;
 
-// TODO: figure out how the coordinates (q, r, s) are in relation to this
-// Basically just add an unit vector as the corresponding value for each direction
+import hex.HexCoord;
+
 public enum Direction {
-	NORTH_WEST,
-	NORTH_EAST,
-	EAST,
-	WEST,
-	SOUTH_WEST,
-	SOUTH_EAST,
+	NORTH_WEST(new HexCoord(0, -1, 1)),
+	NORTH_EAST(new HexCoord(1, -1, 0)),
+	WEST(new HexCoord(-1, 0, 1)),
+	EAST(new HexCoord(1, 0, -1)),
+	SOUTH_WEST(new HexCoord(-1, 1, 0)),
+	SOUTH_EAST(new HexCoord(0, 1, -1));
+	
+	private final HexCoord coords;
+	
+	private Direction(HexCoord coords) {
+		this.coords = coords;
+	}
+	
+	//TODO: This should return immutable coords
+    public HexCoord getUnitVector() {
+        return coords;
+    }
 }
