@@ -1,7 +1,10 @@
 package game.entities;
 import game.Tile;
 
+import hex.HexCoord;
+
 public interface Entity {
+	
 	public void die();
 	public int getActionPriority();
 	public void act();
@@ -10,4 +13,7 @@ public interface Entity {
 	public Boolean isDead();
 	public Tile getTile();
 	public void setTile(Tile tile);
+	public default HexCoord getCoords() {
+		return getTile().getHex().getCoords();
+	}
 }

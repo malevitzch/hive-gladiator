@@ -3,6 +3,8 @@ package game.entities;
 import game.GameState;
 import game.Tile;
 
+import hex.HexCoord;
+
 public class PlayerEntity implements Entity {
 	
 	@Override
@@ -36,15 +38,16 @@ public class PlayerEntity implements Entity {
 		return dead;
 	}
 	
+	@Override
 	public Tile getTile() {
 		return tile;
 	}
 	
-	
+	@Override
 	public void setTile(Tile tile) {
 		this.tile = tile;
 	}
-
+	
 	protected Tile tile;
 	protected Boolean dead = false;
 	protected GameState state;

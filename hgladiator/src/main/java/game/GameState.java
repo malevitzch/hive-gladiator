@@ -162,4 +162,8 @@ public class GameState {
 	public HexBoard getBoard() {
 		return board;
 	}
+	
+	public PlayerEntity getPlayerEntity() {
+		return playerEntity;
+	}
 }

@@ -4,6 +4,8 @@ import game.entities.Entity;
 import game.GameState;
 import game.Tile;
 
+import hex.HexCoord;
+
 public abstract class EnemyEntity implements Entity {
 	
 	@Override
@@ -50,7 +52,7 @@ public abstract class EnemyEntity implements Entity {
 	public void setTile(Tile tile) {
 		this.tile = tile;
 	}
-	
+
 	public EnemyEntity(int id, int actionPriority, GameState state) {
 		this.id = id;
 		this.actionPriority = actionPriority;
