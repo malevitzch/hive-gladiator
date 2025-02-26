@@ -18,6 +18,6 @@ public enum Direction {
 	
 	//TODO: This should return immutable coords
     public HexCoord getUnitVector() {
-        return coords;
+        return new HexCoord(coords);
     }
 }

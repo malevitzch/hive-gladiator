@@ -7,4 +7,9 @@ public class HexCoord {
 		this.r = r;
 		this.s = s;
 	}
+	public HexCoord(HexCoord coords) {
+		this.q = coords.q;
+		this.r = coords.r;
+		this.s = coords.s;
+	}
 }
