@@ -9,7 +9,11 @@ public class HexCoord {
 		this.r = r;
 		this.s = s;
 	}
-	
+
+	public HexCoord() {
+		this.q = this.r = this.s = 0;
+	}
+
 	public HexCoord(HexCoord coords) {
 		this.q = coords.q;
 		this.r = coords.r;
@@ -20,5 +24,13 @@ public class HexCoord {
 		this.q += coords.q;
 		this.r += coords.r;
 		this.s += coords.s;
+	}
+	
+	public static sum(HexCoord ... coords) {
+		HexCoord ret = new HexCoord();
+		for(HexCoord coord : coords) {
+			ret.add(coord);
+		}
+		return ret;
 	}
 }
