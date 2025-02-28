@@ -11,10 +11,10 @@ public class Game {
 		state = new GameState(new GameConfig(10, 3));
 		immutableState = new ImmutableGameState(state);
 	}
-	public Boolean isOver() {
+	public boolean isOver() {
 		return state.isOver();
 	}
-	public Boolean nextTurn() {
+	public boolean nextTurn() {
 		Move playerMove = player.getMove(immutableState);
 		state.makeMove(playerMove);
 		return !state.isOver();

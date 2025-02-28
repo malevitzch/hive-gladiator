@@ -21,7 +21,7 @@ public class Tile {
 		return entity;
 	}
 	
-	public Boolean empty() {
+	public boolean empty() {
 		return entity == null;
 	}
 	

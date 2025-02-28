@@ -10,7 +10,7 @@ public interface Entity {
 	public void act();
 	public int getId();
 	public int getHealth();
-	public Boolean isDead();
+	public boolean isDead();
 	public Tile getTile();
 	public void setTile(Tile tile);
 	public default HexCoord getCoords() {

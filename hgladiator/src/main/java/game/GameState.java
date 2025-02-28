@@ -47,7 +47,7 @@ public class GameState {
 		this.getHex(0, 0, 0).getTile().setEntity(playerEntity);
 	}
 	
-	public Boolean makeMove(Move playerMove) {
+	public boolean makeMove(Move playerMove) {
 		if(isOver()) return false;
 		
 		//TODO: Code goes here
@@ -71,7 +71,7 @@ public class GameState {
 		
 		Collections.sort(entitiesToAct, entityCompare);
 		
-		Boolean playerMoved = false;
+		boolean playerMoved = false;
 		
 		for(Entity entity : entitiesToAct) {
 			if(entity.getActionPriority() > playerMovePriority && !playerMoved) {
@@ -97,7 +97,7 @@ public class GameState {
 		return isOver();
 	}
 	
-	public Boolean isOver() {
+	public boolean isOver() {
 		return playerHealth <= 0;
 	}
 	
@@ -122,7 +122,7 @@ public class GameState {
 		return board.getAllHex();
 	}
 	
-	public Boolean addEntity(Entity entity, HexCoord coords) {
+	public boolean addEntity(Entity entity, HexCoord coords) {
 		Tile targetTile = board.getHex(coords).getTile();
 		if(targetTile.getEntity() != null) {
 			return false;
@@ -143,7 +143,7 @@ public class GameState {
 		entity.getTile().setEntity(null);
 	}
 	
-	public Boolean moveEntity(Entity entity, Tile target) {
+	public boolean moveEntity(Entity entity, Tile target) {
 		if(!target.empty()) {
 			return false;
 		}

@@ -31,7 +31,7 @@ public class PlayerEntity implements Entity {
 		return state.getPlayerHealth();
 	}
 	@Override
-	public Boolean isDead() {
+	public boolean isDead() {
 		if(getHealth() <= 0) {
 			dead = true;
 		}
@@ -49,6 +49,6 @@ public class PlayerEntity implements Entity {
 	}
 	
 	protected Tile tile;
-	protected Boolean dead = false;
+	protected boolean dead = false;
 	protected GameState state;
 }

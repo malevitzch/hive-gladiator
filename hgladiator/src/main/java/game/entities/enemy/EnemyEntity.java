@@ -38,7 +38,7 @@ public abstract class EnemyEntity implements Entity {
 		return health;
 	}
 	@Override
-	public Boolean isDead() {
+	public boolean isDead() {
 		if(getHealth() <= 0) {
 			dead = true;
 		}
@@ -64,10 +64,10 @@ public abstract class EnemyEntity implements Entity {
 	protected abstract void decideMove();
 	
 	protected Tile tile;
-	protected Boolean dead = false;
+	protected boolean dead = false;
 	protected GameState state;
 	protected int health;
 	private int id;
 	private int actionPriority;
-	protected Boolean moveComputed = false;
+	protected boolean moveComputed = false;
 }
