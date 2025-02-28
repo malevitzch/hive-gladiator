@@ -26,7 +26,7 @@ public class HexCoord {
 		this.s += coords.s;
 	}
 	
-	public static sum(HexCoord ... coords) {
+	public static HexCoord sum(HexCoord ... coords) {
 		HexCoord ret = new HexCoord();
 		for(HexCoord coord : coords) {
 			ret.add(coord);
