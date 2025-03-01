@@ -1,10 +1,12 @@
 package game;
 
 import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 
+import game.entities.EntityType;
 import game.entities.Entity;
 import game.entities.PlayerEntity;
 import hex.Hex;
@@ -157,6 +159,11 @@ public class GameState {
 		return true;
 	}
 	
+	public boolean spawnEntity(EntityType type) {
+		//TODO: switch based on type here
+		
+		return true;
+	}
 	
 	// TODO: this might be removed later
 	public HexBoard getBoard() {
