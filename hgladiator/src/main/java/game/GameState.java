@@ -14,6 +14,8 @@ import hex.HexBoard;
 import hex.HexCoord;
 import player.move.Move;
 
+import game.entities.enemy.*;
+
 public class GameState {
 	//TODO: Add all the important information about game state
 	private int score;
@@ -159,8 +161,23 @@ public class GameState {
 		return true;
 	}
 	
-	public boolean spawnEntity(EntityType type) {
-		//TODO: switch based on type here
+	public boolean spawnEntity(EntityType type, Tile tile) {
+		
+		if(!tile.empty()) {
+			return false;
+		}
+		
+		Entity entity;
+		switch(type) {
+			case null:
+				return false;
+			case Wanderer:
+				entity = new Wanderer(entityId++, this);
+				break;
+			default:
+				return false;
+		}
+		tile.setEntity(entity);
 		
 		return true;
 	}
