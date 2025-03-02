@@ -1,5 +1,7 @@
 package hex;
 
+import java.util.Objects;
+
 public class HexCoord {
 	
 	public int q, r, s;
@@ -32,5 +34,26 @@ public class HexCoord {
 			ret.add(coord);
 		}
 		return ret;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(q, r, s);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if(obj == null) {
+			return false;
+		}
+		
+		if(getClass() != obj.getClass()) {
+			return false;
+		}
+		
+		HexCoord coord = (HexCoord) obj;
+		
+		return this.q == coord.q && this.r == coord.r && this.s == coord.s;
 	}
 }
