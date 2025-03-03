@@ -11,10 +11,11 @@ public class Tile {
 	
 	public Tile(Hex hex) {
 		this.hex = hex;
+		this.entity = null;
 	}
 	
 	public Tile() {
-		
+		this.entity = null;
 	}
 	
 	public Entity getEntity() {

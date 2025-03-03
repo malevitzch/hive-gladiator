@@ -53,7 +53,6 @@ public class GameState {
 	
 	public boolean makeMove(Move playerMove) {
 		if(isOver()) return false;
-		
 		//TODO: Code goes here
 		final int playerMovePriority = playerMove.getPriority();
 		
@@ -82,6 +81,7 @@ public class GameState {
 				playerMove.execute(this);
 				playerMoved = true;
 			}
+			entity.act();
 		}
 		
 		if(!playerMoved) {
@@ -161,11 +161,7 @@ public class GameState {
 		return true;
 	}
 	
-	public boolean spawnEntity(EntityType type, Tile tile) {
-		
-		if(!tile.empty()) {
-			return false;
-		}
+	public boolean spawnEntity(EntityType type, HexCoord coords) {
 		
 		Entity entity;
 		switch(type) {
@@ -177,7 +173,8 @@ public class GameState {
 			default:
 				return false;
 		}
-		tile.setEntity(entity);
+		this.addEntity(entity, coords);
+		//FIXME: validate tile
 		
 		return true;
 	}

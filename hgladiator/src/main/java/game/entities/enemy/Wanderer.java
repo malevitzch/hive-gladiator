@@ -21,6 +21,8 @@ public class Wanderer extends EnemyEntity {
 			decideMove();
 		}
 		super.act();
+		HexCoord coords = this.getTile().getHex().getCoords();
+		System.out.format("Wanderer at position: %d %d %d\n", coords.q, coords.r, coords.s);
 		// TODO: tile might be destroyed
 		Tile target = state.getHex(movePos).getTile();
 		state.moveEntity(this, target);
