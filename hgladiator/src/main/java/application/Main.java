@@ -18,6 +18,7 @@ public class Main {
     	GameState state = game.getState();
     	
     	state.spawnEntity(EntityType.Wanderer, new HexCoord(1, -1, 0));
+    	state.spawnEntity(EntityType.Wanderer, new HexCoord(-3, 3, 0));
     	while(!game.isOver()) {
     		game.nextTurn();
     	}

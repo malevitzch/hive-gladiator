@@ -34,9 +34,11 @@ public class GameState {
 		score = 0;
 		playerHealth = this.config.getPlayerHealth();
 		int n = config.getMapSize();
+		
 		ArrayList<Hex> hexes = new ArrayList<>();
 		for(int i = -n; i <= n; i++) {
 			for(int j = -n; j <= n; j++) {
+				if(i + j > n || i + j < -n) continue;
 				Tile tile = new Tile();
 				Hex hex = new Hex(i, j, 0 - i - j, tile);
 				tile.setHex(hex);
